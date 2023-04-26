@@ -3,7 +3,7 @@
 
 void setup()
 {
-  //initialize values for the pins of the teensy
+  //initialize states for the pins of the teensy
   functions::pinInit();
   
   // Begins serial communication
