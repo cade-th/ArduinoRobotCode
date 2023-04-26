@@ -14,10 +14,10 @@ void loop()
 {  
  //read the color sensors
  functions::ReadColorSensors();
- 
- //adjust the values of the color variables
+
+ //adjust the values of the color booleans
  functions::colorInit();
 
- //move based on colors variables
+ //move based on colors variable booleans
  functions::movColor();
 }
