@@ -9,7 +9,7 @@ void setup()
   // Begins serial communication
   Serial.begin(115200);
 }
-//first commit
+
 void loop() 
 {  
  //read the color sensors
@@ -18,6 +18,6 @@ void loop()
  //adjust the values of the color variables
  functions::colorInit();
 
- //move based on colors
+ //move based on colors variables
  functions::movColor();
 }
