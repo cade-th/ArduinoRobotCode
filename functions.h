@@ -6,6 +6,7 @@
 namespace functions {
 
 
+//macros
 #define TimeStep_ms 0
 
 // LEFT and RIGHT TCS230 Color Sensor Pin Assignments
@@ -22,6 +23,7 @@ namespace functions {
 #define RS3 36
 #define R_SensorOut 37
 
+//global variables to use
 //L298 Motor Controller Pin Assignment
 // Motor A pin connections
 extern int enA;
@@ -68,7 +70,7 @@ extern int Rblack;
 extern int Lblack;
 
 
-//functions
+//functions declarations
 void stop();
 
 void movFW(int speed);

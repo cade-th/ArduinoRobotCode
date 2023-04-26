@@ -272,6 +272,7 @@ void pinInit()
   
 }
 
+//function for moving purely based on color
 void movColor()
 {
   //case for black
