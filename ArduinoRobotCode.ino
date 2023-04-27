@@ -1,10 +1,12 @@
 
 #include "functions.h"
 
+using namespace functions;
+
 void setup()
 {
   //initialize states for the pins of the teensy
-  functions::pinInit();
+  pinInit();
   
   // Begins serial communication
   Serial.begin(115200);
@@ -13,11 +15,11 @@ void setup()
 void loop() 
 {  
  //read the color sensors
- functions::ReadColorSensors();
+ ReadColorSensors();
 
  //adjust the values of the color booleans
- functions::colorInit();
+ colorInit();
 
  //move based on colors variable booleans
- functions::movColor();
+ movColor();
 }
