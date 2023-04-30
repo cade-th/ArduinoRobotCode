@@ -1,8 +1,8 @@
 
 #include "functions.h"
 
-namespace functions {
-
+namespace functions 
+{
 //variable assignments
 int enA = 1;
 int in1 = 2;
@@ -53,10 +53,10 @@ void stop()
   analogWrite(enA, 0);
   analogWrite(enB, 0); 
   // Turn off all the motors
-  digitalWrite(in1, LOW);
-  digitalWrite(in2, LOW);
-  digitalWrite(in3, LOW);
-  digitalWrite(in4, LOW);  
+  digitalWrite(in1, LOW1);
+  digitalWrite(in2, LOW1);
+  digitalWrite(in3, LOW1);
+  digitalWrite(in4, LOW1);  
 }
 
 // move forward
@@ -67,10 +67,10 @@ void movFW(int speed)
   analogWrite(enA, PWMval);
   analogWrite(enB, PWMval);
   // Rotate left and right wheels in clockwise direction - Move forward
-  digitalWrite(in1, LOW);
-  digitalWrite(in2, HIGH);
-  digitalWrite(in3, LOW);
-  digitalWrite(in4, HIGH);
+  digitalWrite(in1, LOW1);
+  digitalWrite(in2, HIGH1);
+  digitalWrite(in3, LOW1);
+  digitalWrite(in4, HIGH1);
 };
 
 // move backward
@@ -82,10 +82,10 @@ void movBW(int speed)
   analogWrite(enA, PWMval);
   analogWrite(enB, PWMval);
   // Rotate left and right wheels in anti-clockwise direction - Move backward
-  digitalWrite(in1, HIGH);
-  digitalWrite(in2, LOW);
-  digitalWrite(in3, HIGH);
-  digitalWrite(in4, LOW);  
+  digitalWrite(in1, HIGH1);
+  digitalWrite(in2, LOW1);
+  digitalWrite(in3, HIGH1);
+  digitalWrite(in4, LOW1);  
 }
 
 // turn left
@@ -96,10 +96,10 @@ void movCW(int speed)
   analogWrite(enA, PWMval);
   analogWrite(enB, PWMval);
   // Rotate left wheel clockwise and right wheel in anti-clockwise direction - Spin clockwise/Turnright
-  digitalWrite(in1, LOW);
-  digitalWrite(in2, HIGH);
-  digitalWrite(in3, HIGH);
-  digitalWrite(in4, LOW);
+  digitalWrite(in1, LOW1);
+  digitalWrite(in2, HIGH1);
+  digitalWrite(in3, HIGH1);
+  digitalWrite(in4, LOW1);
   //delay(500);
 }
 
@@ -111,10 +111,10 @@ void movCCW(int speed)
   analogWrite(enA, PWMval);
   analogWrite(enB, PWMval);
   // Rotate left wheel anti-clockwise and right wheel in clockwise direction - Spin anti-clockwiseTurn left
-  digitalWrite(in1, HIGH);
-  digitalWrite(in2, LOW);
-  digitalWrite(in3, LOW);
-  digitalWrite(in4, HIGH);
+  digitalWrite(in1, HIGH1);
+  digitalWrite(in2, LOW1);
+  digitalWrite(in3, LOW1);
+  digitalWrite(in4, HIGH1);
   //delay(500); // turn left for 1 second  
 }
 
@@ -122,15 +122,15 @@ void ReadColorSensors()
 {
   // Setting RED (R) filter photodiodes to be read
   
-  digitalWrite(RS2,LOW);
-  digitalWrite(RS3,LOW);
-  digitalWrite(LS2,LOW);
-  digitalWrite(LS3,LOW);
+  digitalWrite(RS2,LOW1);
+  digitalWrite(RS3,LOW1);
+  digitalWrite(LS2,LOW1);
+  digitalWrite(LS3,LOW1);
   
   // Reading the output frequency
   
-  RredFrequency = pulseIn(R_SensorOut, LOW,10000);
-  LredFrequency = pulseIn(L_SensorOut, LOW,10000);
+  RredFrequency = pulseIn(R_SensorOut, LOW1,10000);
+  LredFrequency = pulseIn(L_SensorOut, LOW1,10000);
   
   // Remaping the value of the RED (R) frequency from 0 to 255
   
@@ -139,15 +139,15 @@ void ReadColorSensors()
  
   // Setting GREEN (G) filtered photodiodes to be read
   
-  digitalWrite(RS2,HIGH);
-  digitalWrite(RS3,HIGH);
-  digitalWrite(LS2,HIGH);
-  digitalWrite(LS3,HIGH);
+  digitalWrite(RS2,HIGH1);
+  digitalWrite(RS3,HIGH1);
+  digitalWrite(LS2,HIGH1);
+  digitalWrite(LS3,HIGH1);
   
   // Reading the output frequency
   
-  RgreenFrequency = pulseIn(R_SensorOut, LOW,10000);
-  LgreenFrequency = pulseIn(L_SensorOut, LOW,10000);
+  RgreenFrequency = pulseIn(R_SensorOut, LOW1,10000);
+  LgreenFrequency = pulseIn(L_SensorOut, LOW1,10000);
   
   // Remaping the value of the GREEN (G) frequency from 0 to 255
   
@@ -156,15 +156,15 @@ void ReadColorSensors()
 
   // Setting BLUE (B) filtered photodiodes to be read
   
-  digitalWrite(RS2,LOW);
-  digitalWrite(RS3,HIGH);
-  digitalWrite(LS2,LOW);
-  digitalWrite(LS3,HIGH);
+  digitalWrite(RS2,LOW1);
+  digitalWrite(RS3,HIGH1);
+  digitalWrite(LS2,LOW1);
+  digitalWrite(LS3,HIGH1);
   
   // Reading the output frequency
   
-  RblueFrequency = pulseIn(R_SensorOut, LOW,10000);
-  LblueFrequency = pulseIn(L_SensorOut, LOW,10000);
+  RblueFrequency = pulseIn(R_SensorOut, LOW1,10000);
+  LblueFrequency = pulseIn(L_SensorOut, LOW1,10000);
   
   // Remaping the value of the BLUE (B) frequency from 0 to 255
   
@@ -215,60 +215,60 @@ void colorInit()
 void pinInit()
 {
   // Set all motor controller pins as outputs
-  pinMode(enA, OUTPUT);
-  pinMode(enB, OUTPUT);
-  pinMode(in1, OUTPUT);
-  pinMode(in2, OUTPUT);
-  pinMode(in3, OUTPUT);
-  pinMode(in4, OUTPUT);
+  pinMode(enA, OUTPUT1);
+  pinMode(enB, OUTPUT1);
+  pinMode(in1, OUTPUT1);
+  pinMode(in2, OUTPUT1);
+  pinMode(in3, OUTPUT1);
+  pinMode(in4, OUTPUT1);
   
   // Initial state - Turn off all the motors
-  digitalWrite(in1, LOW);
-  digitalWrite(in2, LOW);
-  digitalWrite(in3, LOW);
-  digitalWrite(in4, LOW);
+  digitalWrite(in1, LOW1);
+  digitalWrite(in2, LOW1);
+  digitalWrite(in3, LOW1);
+  digitalWrite(in4, LOW1);
 
   // Set all motor controller pins as outputs
   
-  pinMode(EnableLM, OUTPUT);
-  pinMode(EnableRM, OUTPUT);
-  pinMode(LM_in1, OUTPUT);
-  pinMode(LM_in2, OUTPUT);
-  pinMode(RM_in3, OUTPUT);
-  pinMode(RM_in4, OUTPUT);
+  pinMode(EnableLM, OUTPUT1);
+  pinMode(EnableRM, OUTPUT1);
+  pinMode(LM_in1, OUTPUT1);
+  pinMode(LM_in2, OUTPUT1);
+  pinMode(RM_in3, OUTPUT1);
+  pinMode(RM_in4, OUTPUT1);
   
   // Initial state - Turn off all the motors
   
-  digitalWrite(LM_in1, LOW);
-  digitalWrite(LM_in2, LOW);
-  digitalWrite(RM_in3, LOW);
-  digitalWrite(RM_in4, LOW);
+  digitalWrite(LM_in1, LOW1);
+  digitalWrite(LM_in2, LOW1);
+  digitalWrite(RM_in3, LOW1);
+  digitalWrite(RM_in4, LOW1);
 
   // Port setup for LEFT color sensor pins
   
-  pinMode(LS0, OUTPUT);
-  pinMode(LS1, OUTPUT);
-  pinMode(LS2, OUTPUT);
-  pinMode(LS3, OUTPUT);
-  pinMode(L_SensorOut, INPUT);
+  pinMode(LS0, OUTPUT1);
+  pinMode(LS1, OUTPUT1);
+  pinMode(LS2, OUTPUT1);
+  pinMode(LS3, OUTPUT1);
+  pinMode(L_SensorOut, INPUT1);
   
   // Setting LEFT sensor frequency scaling to 20%
   
-  digitalWrite(LS0,HIGH);
-  digitalWrite(LS1,LOW);
+  digitalWrite(LS0,HIGH1);
+  digitalWrite(LS1,LOW1);
   
   // Port setup for RIGHT color sensor pins
   
-  pinMode(RS0, OUTPUT);
-  pinMode(RS1, OUTPUT);
-  pinMode(RS2, OUTPUT);
-  pinMode(RS3, OUTPUT);
-  pinMode(R_SensorOut, INPUT);
+  pinMode(RS0, OUTPUT1);
+  pinMode(RS1, OUTPUT1);
+  pinMode(RS2, OUTPUT1);
+  pinMode(RS3, OUTPUT1);
+  pinMode(R_SensorOut, INPUT1);
   
   // Setting RIGHT sensor frequency scaling to 20%
   
-  digitalWrite(RS0,HIGH);
-  digitalWrite(RS1,LOW);
+  digitalWrite(RS0,HIGH1);
+  digitalWrite(RS1,LOW1);
   
 }
 
@@ -315,4 +315,5 @@ void movColor()
   }
 }
 }
+
 //namespace

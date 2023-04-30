@@ -2,12 +2,18 @@
 #define _functions_h
 
 #include "Arduino.h"
+#include "arduino_freertos.h"
+#include "avr/pgmspace.h"
 
 namespace functions {
 
 
 //macros
 #define TimeStep_ms 0
+#define LOW1 arduino::LOW
+#define HIGH1 arduino::HIGH
+#define OUTPUT1 arduino::OUTPUT
+#define INPUT1 arduino::INPUT
 
 // LEFT and RIGHT TCS230 Color Sensor Pin Assignments
 

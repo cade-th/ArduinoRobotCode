@@ -1,5 +1,7 @@
 
 #include "functions.h"
+//freertos included as a zip library
+//had to get a custom one to work with the teensy board
 
 using namespace functions;
 
