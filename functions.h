@@ -2,18 +2,16 @@
 #define _functions_h
 
 #include "Arduino.h"
-#include "arduino_freertos.h"
-#include "avr/pgmspace.h"
-
-namespace functions {
-
 
 //macros
 #define TimeStep_ms 0
-#define LOW1 arduino::LOW
-#define HIGH1 arduino::HIGH
-#define OUTPUT1 arduino::OUTPUT
-#define INPUT1 arduino::INPUT
+
+//ultrasonic sensors
+#define echoPin1 28 // attach Echo of HC-SR04
+#define trigPin1 29 //attach Trig of HC-SR04
+
+#define echoPin2 ? // attach Echo of HC-SR04
+#define trigPin2 ? //attach Trig of HC-SR04
 
 // LEFT and RIGHT TCS230 Color Sensor Pin Assignments
 
@@ -75,6 +73,9 @@ extern int Lwhite;
 extern int Rblack;
 extern int Lblack;
 
+//ultrasonic variables
+long duration;
+int distance;
 
 //functions declarations
 void stop();
@@ -95,5 +96,5 @@ void pinInit();
 
 void movColor();
 
-}
+
 #endif
