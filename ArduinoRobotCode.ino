@@ -12,8 +12,13 @@ void setup()
 void loop() 
 {  
   
- readColorSensors();
+ //ReadColorSensors();
 
- 
+ //colorInit();
+
+ //movColor();
+
+ movFW(120);
+
 
 }

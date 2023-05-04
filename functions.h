@@ -7,11 +7,11 @@
 #define TimeStep_ms 0
 
 //ultrasonic sensors
-#define echoPin1 28 // attach Echo of HC-SR04
-#define trigPin1 29 //attach Trig of HC-SR04
+#define echoPinR 16 // attach Echo of HC-SR04
+#define trigPinR 17 //attach Trig of HC-SR04
 
-#define echoPin2 ? // attach Echo of HC-SR04
-#define trigPin2 ? //attach Trig of HC-SR04
+#define echoPinL 21// attach Echo of HC-SR04
+#define trigPinL 20//attach Trig of HC-SR04
 
 // LEFT and RIGHT TCS230 Color Sensor Pin Assignments
 
@@ -73,9 +73,12 @@ extern int Lwhite;
 extern int Rblack;
 extern int Lblack;
 
-//ultrasonic variables
-long duration;
-int distance;
+//ultrasonic global variables
+extern long durationR;
+extern int distanceR;
+
+extern long durationL;
+extern int distanceL;
 
 //functions declarations
 void stop();
@@ -95,6 +98,10 @@ void colorInit();
 void pinInit();
 
 void movColor();
+
+void testUltraL();
+
+void testUltraR();
 
 
 #endif

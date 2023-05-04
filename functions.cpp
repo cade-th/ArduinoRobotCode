@@ -271,11 +271,11 @@ void pinInit()
   digitalWrite(RS1,LOW);
 
   //ultrasonic pins
-  pinMode(trigPin1, OUTPUT); 
-  pinMode(echoPin1, INPUT);
+  pinMode(trigPinR, OUTPUT); 
+  pinMode(echoPinR, INPUT);
 
-  pinMode(trigPin2, OUTPUT); 
-  pinMode(echoPin2, INPUT);
+  pinMode(trigPinL, OUTPUT); 
+  pinMode(echoPinL, INPUT);
   
 }
 
@@ -287,9 +287,9 @@ void movColor()
   {
     //Serial.print("Black");
     //Serial.print("\n");
-    movFW(25);
+    movFW(100); //25
     delay(750);
-    movCCW(50);
+    movCCW(100); //50
     delay(1100);
      
   }
@@ -297,7 +297,7 @@ void movColor()
   //case for both sensors reading white
   else if(Rwhite && Lwhite)
   {
-    movFW(20);
+    movFW(100); //20
   }
  
   //else, if not black or white is detected
@@ -307,20 +307,58 @@ void movColor()
     if (!Rwhite && Lwhite)
     {
       delay(100);
-      movCW(20);
+      movCW(100); //20
     }
     // Left sensor detects color
     else if (!Lwhite && Rwhite )
     {
       delay(100);
-      movCCW(20);
+      movCCW(100); //20
     }
     //If both sensors detect a color
     else{
-      movFW(20);
+      movFW(100); //20
     }
   }
 }
+
+void testUltraL()
+{
+  digitalWrite(trigPinL, LOW);
+  delayMicroseconds(2);
+  // Sets the trigPin HIGH for 10 microseconds
+  digitalWrite(trigPinL, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPinL, LOW);
+  // Reads the echoPin, returns the sound wave in microseconds
+  durationL = pulseIn(echoPinL, HIGH);
+  // Calculating the distance
+  distanceL = durationL * 0.034 / 2; // Speed of sound wave divided by 2 (send & receive)
+
+  Serial.print(distanceL);
+  Serial.println("cm");
+  delay(1000);
+}
+
+void testUltraR()
+{
+  digitalWrite(trigPinR, LOW);
+  delayMicroseconds(2);
+  // Sets the trigPin HIGH for 10 microseconds
+  digitalWrite(trigPinR, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPinR, LOW);
+  // Reads the echoPin, returns the sound wave in microseconds
+  durationR = pulseIn(echoPinR, HIGH);
+  // Calculating the distance
+  distanceR = durationR * 0.034 / 2; // Speed of sound wave divided by 2 (send & receive)
+
+  Serial.print(distanceR);
+  Serial.println("cm");
+  delay(1000);
+}
+
+
 
 
 //namespace
