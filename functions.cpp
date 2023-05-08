@@ -26,6 +26,16 @@ int RgreenColor = 0;
 int RblueColor = 0;
 int RstopColor = 0;
 
+//ultrasonic global variables
+long durationR = 0;
+int distanceR = 0;
+
+long durationL = 0;
+int distanceL = 0;
+
+long durationM = 0;
+int distanceM = 0;
+
 //L298 Motor Controller Pin Assignment
 
 // LEFT Motor (LM) pin connections
@@ -118,7 +128,7 @@ void movCCW(int speed)
   //delay(500); // turn left for 1 second  
 }
 
-void ReadColorSensors()
+void readColorSensors()
 {
   // Setting RED (R) filter photodiodes to be read
   
@@ -276,6 +286,9 @@ void pinInit()
 
   pinMode(trigPinL, OUTPUT); 
   pinMode(echoPinL, INPUT);
+
+  pinMode(trigPinM, OUTPUT); 
+  pinMode(echoPinM, INPUT);
   
 }
 
@@ -287,9 +300,9 @@ void movColor()
   {
     //Serial.print("Black");
     //Serial.print("\n");
-    movFW(100); //25
+    movFW(movSpd); //25
     delay(750);
-    movCCW(100); //50
+    movCCW(rotSpd); //50
     delay(1100);
      
   }
@@ -297,7 +310,7 @@ void movColor()
   //case for both sensors reading white
   else if(Rwhite && Lwhite)
   {
-    movFW(100); //20
+    movFW(movSpd); //20
   }
  
   //else, if not black or white is detected
@@ -307,22 +320,22 @@ void movColor()
     if (!Rwhite && Lwhite)
     {
       delay(100);
-      movCW(100); //20
+      movCW(rotSpd); //20
     }
     // Left sensor detects color
     else if (!Lwhite && Rwhite )
     {
       delay(100);
-      movCCW(100); //20
+      movCCW(movSpd); //20
     }
     //If both sensors detect a color
     else{
-      movFW(100); //20
+      movFW(movSpd); //20
     }
   }
 }
 
-void testUltraL()
+void readUltraR()
 {
   digitalWrite(trigPinL, LOW);
   delayMicroseconds(2);
@@ -334,13 +347,9 @@ void testUltraL()
   durationL = pulseIn(echoPinL, HIGH);
   // Calculating the distance
   distanceL = durationL * 0.034 / 2; // Speed of sound wave divided by 2 (send & receive)
-
-  Serial.print(distanceL);
-  Serial.println("cm");
-  delay(1000);
 }
 
-void testUltraR()
+void readUltraL()
 {
   digitalWrite(trigPinR, LOW);
   delayMicroseconds(2);
@@ -352,13 +361,43 @@ void testUltraR()
   durationR = pulseIn(echoPinR, HIGH);
   // Calculating the distance
   distanceR = durationR * 0.034 / 2; // Speed of sound wave divided by 2 (send & receive)
+}
 
-  Serial.print(distanceR);
-  Serial.println("cm");
-  delay(1000);
+void readUltraM()
+{
+  digitalWrite(trigPinM, LOW);
+  delayMicroseconds(2);
+  // Sets the trigPin HIGH for 10 microseconds
+  digitalWrite(trigPinM, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPinM, LOW);
+  // Reads the echoPin, returns the sound wave in microseconds
+  durationM = pulseIn(echoPinM, HIGH);
+  // Calculating the distance
+  distanceM = durationM * 0.034 / 2; // Speed of sound wave divided by 2 (send & receive)
 }
 
 
+void readUltraSensors()
+{
+  readUltraR();
+  readUltraM();
+  readUltraM();
+}
 
-
-//namespace
+void moveUltra() 
+{
+  if (distanceR > 40)
+  {
+    movCCW(rotSpd);
+  }
+  if (distanceL > 40)
+  {
+    movCW(rotSpd);
+  }
+  if (distanceM > 40)
+  {
+    movBW(movSpd);
+  }
+  
+}

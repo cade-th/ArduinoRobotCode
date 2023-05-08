@@ -11,14 +11,14 @@ void setup()
 
 void loop() 
 {  
-  
- //ReadColorSensors();
 
+ //move based on ultrasonic
+  readUltraSensors();
+ 
+
+ //move based on colors
+ //readColorSensors();
  //colorInit();
-
  //movColor();
-
- movFW(120);
-
 
 }

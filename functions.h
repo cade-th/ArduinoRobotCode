@@ -13,6 +13,19 @@
 #define echoPinL 21// attach Echo of HC-SR04
 #define trigPinL 20//attach Trig of HC-SR04
 
+#define echoPinM 15// attach Echo of HC-SR04
+#define trigPinM 14//attach Trig of HC-SR04
+
+//ultrasonic global variables
+extern long durationR;
+extern int distanceR;
+
+extern long durationL;
+extern int distanceL;
+
+extern long durationM;
+extern int distanceM;
+
 // LEFT and RIGHT TCS230 Color Sensor Pin Assignments
 
 #define LS0 32
@@ -26,6 +39,9 @@
 #define RS2 35
 #define RS3 36
 #define R_SensorOut 37
+
+#define movSpd 100
+#define rotSpd 100
 
 //global variables to use
 //L298 Motor Controller Pin Assignment
@@ -73,13 +89,6 @@ extern int Lwhite;
 extern int Rblack;
 extern int Lblack;
 
-//ultrasonic global variables
-extern long durationR;
-extern int distanceR;
-
-extern long durationL;
-extern int distanceL;
-
 //functions declarations
 void stop();
 
@@ -91,7 +100,7 @@ void movCW(int speed);
 
 void movCCW(int speed);
 
-void ReadColorSensors();
+void readColorSensors();
 
 void colorInit();
 
@@ -99,9 +108,18 @@ void pinInit();
 
 void movColor();
 
-void testUltraL();
+//works
+void readUltraL();
 
-void testUltraR();
+//works
+void readUltraR();
+
+//works
+void readUltraM();
+
+void readUltraSensors();
+
+void movUltra();
 
 
 #endif
