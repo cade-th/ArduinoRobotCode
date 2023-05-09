@@ -7,5 +7,7 @@ Log of Things Done:
 	- assignments for global variables go in src file
 
 2. Added Ultrasonc sensor test code
-	- need to test device
-	- move based on data from device
+    - All functionality achieved
+	- Need to move based on data from device
+    - Motors not working
+
