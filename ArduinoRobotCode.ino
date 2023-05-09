@@ -9,12 +9,14 @@ void setup()
   Serial.begin(115200);
 }
 
-void loop() 
+void loop()
 {  
-
+ 
  //move based on ultrasonic
   readUltraSensors();
- 
+ // movUltra();
+  
+ // movFW(130);
 
  //move based on colors
  //readColorSensors();

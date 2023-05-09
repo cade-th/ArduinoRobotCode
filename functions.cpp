@@ -382,20 +382,52 @@ void readUltraSensors()
 {
   readUltraR();
   readUltraM();
-  readUltraM();
+  readUltraL();
+
+  
+  Serial.print("DistanceM: ");
+  Serial.println(distanceM);
+  if (distanceM < 15)
+  {
+    Serial.println("backing up");
+    //movBW(movSpd);
+  }
+  
+  Serial.print("DistanceR: ");
+  Serial.println(distanceR);
+  if (distanceR < 15)
+  {
+    Serial.println("turning Right");
+    //movCCW(rotSpd);
+  }
+  
+  Serial.print("DistanceL: ");
+  Serial.println(distanceL);
+  if (distanceL < 15)
+  {
+    Serial.println("turning left");
+    //movCW(rotSpd);
+  }
+  
+  delay(1000);
+  
+  
+
+  
+  
 }
 
-void moveUltra() 
+void movUltra() 
 {
-  if (distanceR > 40)
+  if (distanceR < 15)
   {
     movCCW(rotSpd);
   }
-  if (distanceL > 40)
+  if (distanceL < 15)
   {
     movCW(rotSpd);
   }
-  if (distanceM > 40)
+  if (distanceM < 15)
   {
     movBW(movSpd);
   }

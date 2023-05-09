@@ -40,8 +40,8 @@ extern int distanceM;
 #define RS3 36
 #define R_SensorOut 37
 
-#define movSpd 100
-#define rotSpd 100
+#define movSpd 140
+#define rotSpd 140
 
 //global variables to use
 //L298 Motor Controller Pin Assignment
