@@ -4,6 +4,26 @@
 #include "Arduino.h"
 
 //macros
+
+#define ARMBOTTOM 180
+#define GRIPPEROPEN 150
+#define GRIPPERCLOSED 0
+#define ARMTOP 75
+
+#define ForceSen A6
+
+#define movSpd 140
+#define rotSpd 100
+
+#define blackVal 150
+#define whiteVal 200
+
+#define boxColorRed 1
+#define boxColorBlue 0
+
+#define boxSizeBig 1
+#define boxSizeSmall 0
+
 #define TimeStep_ms 0
 
 //ultrasonic sensors
@@ -26,7 +46,16 @@ extern int distanceL;
 extern long durationM;
 extern int distanceM;
 
-// LEFT and RIGHT TCS230 Color Sensor Pin Assignments
+extern int boxFound;
+extern int boxGrabbed;
+//1 for red, 0 for blue
+
+//1 for red, 0 for blue
+extern int boxColor;
+//1 for big, 0 for small
+extern int boxSize;
+
+// LEFT and RIGHT TCS230 Color Sensor Pin Assignments (and now with middle)
 
 #define LS0 32
 #define LS1 31
@@ -40,12 +69,16 @@ extern int distanceM;
 #define RS3 36
 #define R_SensorOut 37
 
-#define movSpd 140
-#define rotSpd 140
+#define MS0 12
+#define MS1 11
+#define MS2 10
+#define MS3 9
+#define M_SensorOut 8
 
 //global variables to use
 //L298 Motor Controller Pin Assignment
 // Motor A pin connections
+
 extern int enA;
 extern int in1;
 extern int in2;
@@ -53,6 +86,38 @@ extern int in2;
 extern int enB;
 extern int in3;
 extern int in4;
+
+extern int timeT;
+
+//Force Sensor Setup
+extern float M; 
+extern float C;
+
+extern int R1; 
+extern int R2;
+extern int R3;
+extern int Vin;
+
+
+extern int force;
+extern float Vout;
+extern float Rx;
+extern float weight;
+
+
+extern int PWMSignal;
+extern int grip;
+
+
+//Gripper Setup
+//Servo Gripper;  // create servo object to control a servo
+//Servo Arm;  // create servo object to control a servo
+
+extern int PWMSignal;
+extern int grip;
+
+extern int armPosition;
+extern int gripperPosition;
 
 extern int LredFrequency;
 extern int LgreenFrequency;
@@ -70,24 +135,25 @@ extern int RgreenColor;
 extern int RblueColor;
 extern int RstopColor;
 
-//L298 Motor Controller Pin Assignment
+extern int McolorDifference;
 
-// LEFT Motor (LM) pin connections
-extern int EnableLM;
-extern int LM_in1;
-extern int LM_in2;
-
-// RIGHT Motor (RM) pin connections
-extern int EnableRM;
-extern int RM_in3;
-extern int RM_in4;
+extern int MredFrequency;
+extern int MblueFrequency;
+extern int MredColor;
+extern int MblueColor;
+extern int MstopColor;
 
 extern int BRotate;
 
+//booleans
 extern int Rwhite;
 extern int Lwhite;
 extern int Rblack;
 extern int Lblack;
+
+extern int Mred;
+extern int Mblue;
+
 
 //functions declarations
 void stop();
@@ -121,5 +187,29 @@ void readUltraSensors();
 
 void movUltra();
 
+void testColorsFreq();
 
+void testColorsValue();
+
+void testColorBooleans();
+
+void gripArmInit();
+
+void controlGripper(int distance);
+
+void readForce();
+
+void controlArm(int distance);
+
+void readMColorValues();
+
+void readMColorBooleans();
+
+void printWeight();
+
+void detectBox();
+
+void grabBox();
+
+void findBox();
 #endif
