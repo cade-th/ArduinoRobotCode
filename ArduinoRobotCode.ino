@@ -1,4 +1,3 @@
-
 #include "functions.h"
 
 void setup()
@@ -8,7 +7,6 @@ void setup()
  
   // Begins serial communication
   Serial.begin(115200);
-  
 }
 
 void loop()
@@ -16,25 +14,16 @@ void loop()
  //move based on ultrasonic
  //readUltraSensors();
  //movUltra();
- //movFW(movSpd);
 
 
-    readColorSensors();
-    colorInit();
-    
-  
-    findBox();
-    Serial.print(gripperPosition);
+ readColorSensors();
+ colorInit();
+
+ testColorBooleans();
  
-  
+ //movColor();
  
-  
-
-
-  
-
- /*
-
+/*
   //MOTOR TEST------------------------------------------------
   movFW(movSpd);
   delay(1500); // time for move fw
@@ -46,7 +35,7 @@ void loop()
   delay(1500); // time for move bw
   stop();
   delay(1000); // delay whole program for 10s
-  ---------------------------------------------------------------
-
+  //---------------------------------------------------------------
 */
+
 }

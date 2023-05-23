@@ -12,8 +12,8 @@
 
 #define ForceSen A6
 
-#define movSpd 140
-#define rotSpd 100
+#define movSpd 70
+#define rotSpd 70
 
 #define blackVal 150
 #define whiteVal 200
@@ -151,8 +151,19 @@ extern int Lwhite;
 extern int Rblack;
 extern int Lblack;
 
+extern int Rred;
+extern int Lred;
+extern int Rblue;
+extern int Lblue;
+extern int Lgreen;
+extern int Rgreen;
+extern int Lyellow;
+extern int Ryellow;
+
+
 extern int Mred;
 extern int Mblue;
+extern int Mwhite;
 
 
 //functions declarations
@@ -212,4 +223,6 @@ void detectBox();
 void grabBox();
 
 void findBox();
+
+void detectWhite();
 #endif

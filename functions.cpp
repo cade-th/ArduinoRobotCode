@@ -82,10 +82,20 @@ int distanceM = 0;
 
 int BRotate = 1;
 
+//booleans
 int Rwhite = 0;
 int Lwhite = 0;
 int Rblack = 0;
 int Lblack = 0;
+
+int Rred = 0;
+int Lred = 0;
+int Rblue = 0;
+int Lblue = 0;
+int Rgreen = 0;
+int Lgreen = 0;
+int Lyellow = 0;
+int Ryellow = 0;
 
 int Mred = 0;
 int Mblue = 0;
@@ -184,8 +194,8 @@ void readColorSensors()
   
   // Remaping the value of the RED (R) frequency from 0 to 255
   
-  RredColor = map(RredFrequency,80, 210, 255, 0);
-  LredColor = map(LredFrequency,80, 210, 255, 0); 
+  RredColor = map(RredFrequency,45, 150, 255, 0);
+  LredColor = map(LredFrequency, 45, 210, 255, 0); 
   MredColor = map(MredFrequency,80, 210, 255, 0);
   
  
@@ -204,8 +214,8 @@ void readColorSensors()
   
   // Remaping the value of the GREEN (G) frequency from 0 to 255
   
-  RgreenColor = map(RgreenFrequency, 50, 200, 255, 0);
-  LgreenColor = map(LgreenFrequency, 50, 200, 255, 0);
+  RgreenColor = map(RgreenFrequency, 22, 265, 255, 0);
+  LgreenColor = map(LgreenFrequency, 27, 225, 255, 0);
 
   // Setting BLUE (B) filtered photodiodes to be read
   
@@ -224,56 +234,15 @@ void readColorSensors()
   
   // Remaping the value of the BLUE (B) frequency from 0 to 255
   
-  RblueColor = map(RblueFrequency, 80, 250, 255, 0);
-  LblueColor = map(LblueFrequency, 80, 250, 255, 0);
+  RblueColor = map(RblueFrequency, 21, 170, 255, 0);
+  LblueColor = map(LblueFrequency, 17, 200, 255, 0);
   MblueColor = map(MblueFrequency, 80, 250, 255, 0);
 }
 
 void colorInit() 
 {
-
-  /*
-  if(RredColor >= whiteVal && RgreenColor >= whiteVal && RblueColor >= whiteVal)
-  {
-  //Right sensor white
-    Rwhite = 1;
-  }
-  else
-  {
-    Rwhite = 0;
-  }
-  if(LredColor >= whiteVal  && LgreenColor >= whiteVal && LblueColor >= whiteVal)
-  {
-  //Left sensor white
-    Lwhite = 1;
-  }
-  else
-  {
-    Lwhite = 0;
-  }
-  if(RredColor <= blackVal && RgreenColor <= blackVal && RblueColor <= blackVal)
-  {
-  //Right sensor Black
-    Rblack = 1;
-  }
-  else
-  {
-    Rblack = 0;
-  }
-  if(LredColor <= blackVal && LgreenColor <= blackVal && LblueColor <= blackVal)
-  {
-  //Left sensor Black
-    Lblack = 1;
-  }
-  else
-  {
-    Lblack = 0;
-  }
-
-*/
- 
-  //MIDDLE COLOR BOOLEANS ---------------------------------------------------
-
+  
+  //middle color booleans ----------------------------------------------
   McolorDifference = MredColor - MblueColor;
    
   if(McolorDifference > 90)
@@ -294,32 +263,68 @@ void colorInit()
     Mblue = 0;
   }
 
-/*
-  //Right COLOR BOOLEANS ---------------------------------------------------
-
-  McolorDifference = MredColor - MblueColor;
-   
-  if(McolorDifference > 90)
-  {
-    Mred = 1;
-  }
-  else 
-  {
-    Mred = 0;
-  }
+  //left and right booleans -----------------------------------------------
   
- if(McolorDifference < -200)
+  if(RredColor > 220 && RgreenColor > 190 && RblueColor > 190)
   {
-    Mblue = 1;
-  } 
+    Rwhite = 1;
+  }
+  else if(RredColor <50 && RgreenColor <120 && RblueColor <50)
+  {
+    Rblack = 1;
+  }
+  else if(RredColor > 200 && RgreenColor > 200)
+  {
+    Ryellow = 1;
+  }
+  else if(RredColor > RblueColor && RredColor > RgreenColor )
+  {
+    Rred = 1;
+  }
+  else if(RblueColor > RredColor && RblueColor > RgreenColor )
+  {
+    Rblue = 1;
+  }
+  else if(RgreenColor > RredColor && RgreenColor > RblueColor)
+  {
+    Rgreen = 1;
+  }
   else
   {
-    Mblue = 0;
+   Serial.println("No Color Detected in Right Sensor"); 
   }
 
-  */
- }
 
+  if(LredColor > 220 && LgreenColor > 190 && LblueColor > 190)
+  {
+    Lwhite = 1;
+  }
+  else if(LredColor <70 && LgreenColor<70 && LblueColor<70)
+  {
+    Lblack = 1;
+  }
+  else if(LredColor > 190 && LgreenColor > 190)
+  {
+    Lyellow = 1;
+  }
+  else if(LredColor > LblueColor && LredColor > LgreenColor )
+  {
+    Lred = 1;
+  }
+  else if(LblueColor > LredColor && LblueColor > LgreenColor )
+  {
+    Lblue = 1;
+  }
+  else if(LgreenColor > LredColor && LgreenColor > LblueColor)
+  {
+    Lgreen = 1;
+  }
+  else
+  {
+   Serial.println("No Color Detected in Left Sensor"); 
+  }
+}
+  
 void pinInit()
 {
   // Set all motor controller pins as outputs
@@ -414,7 +419,7 @@ void movColor()
     movFW(movSpd); //20
   }
 
- /*
+ 
   //else, if not black or white is detected
   else
   {
@@ -450,7 +455,7 @@ void movColor()
       
     }
   }
-  */
+  
 }
 
 void readUltraR()
@@ -531,56 +536,41 @@ void readUltraSensors()
 
 void movUltra() 
 {
+  readUltraM();
+  movFW(movSpd);
 
-  if (distanceR < 20)
+  if (distanceM <15)
   {
-    stop();
-    //delay(1000);
-    
+    detectWhite();
+    movCW(rotSpd);
+    delay(500);
+    readUltraL();
   }
-
+  
+  while (distanceL < 15 && distanceL > 10)
+  {
+    detectWhite();
+    readUltraL();
+    movFW(movSpd);
+  }
+ 
+  /*
   if (distanceL < 20)
   {
     stop();
-    //delay(1000);
+    delay(1000);
   }
 
   if (distanceM < 20)
   {
     stop();
-    //delay(1000);
+    delay(1000);
   }
   movFW(movSpd);
 
+  */
+
   /*
-  //object in front
-  if (distanceM < 20)
-  {
-    movBW(rotSpd);
-    movCW(rotSpd);
-  }
-  
-  //object to the right
-  if (distanceR < 20)
-  {
-    while (distanceR < 20)
-    {
-      movFW(movSpd);
-    }
-    movCW(rotSpd);
-   
-  }
-  
-  //object to the right
-  if (distanceL < 20)
-  {
-    while (distanceL < 20)
-    {
-      movFW(movSpd);
-    }
-    movCCW(rotSpd);
-  } 
-  
   //white color detected right
   if (Rwhite)
   {
@@ -649,15 +639,46 @@ void testColorsFreq()
 
 void testColorBooleans()
 {
+  //right black
   Serial.print("RBlack:");
   Serial.println(Rblack);
-  Serial.print("RWhite:");
-  Serial.println(Rwhite);
+
+  //left black
   Serial.print("LBlack:");
   Serial.println(Lblack);
-  Serial.print("LWhite");
+
+  //right white
+  Serial.print("RWhite:");
+  Serial.println(Rwhite);
+
+  //left white
+  Serial.print("LWhite:");
   Serial.println(Lwhite);
- delay(100);
+
+  //right red
+  Serial.print("Rred:");
+  Serial.println(Rred);
+
+  //left red
+  Serial.print("Lred:");
+  Serial.println(Lred);
+
+  //right green
+  Serial.print("Rgreen:");
+  Serial.println(Rgreen);
+
+  //left green
+  Serial.print("Lgreen:");
+  Serial.println(Lgreen);
+
+  //right blue
+  Serial.print("Rblue:");
+  Serial.println(Rblue);
+
+  //left blue
+  Serial.print("Lblue:");
+  Serial.println(Lblue);
+
 }
 
 void gripArmInit()
@@ -767,7 +788,6 @@ void grabBox()
     boxGrabbed = 1;
    
   }
-  
 }
 
 void findBox()
@@ -778,5 +798,16 @@ void findBox()
   if(boxGrabbed)
   {
     controlArm(ARMTOP);
+  }
+}
+
+void detectWhite()
+{
+  if (Rwhite || Lwhite) 
+  {
+    movBW(movSpd);
+    delay(300);
+    movCW(movSpd);
+    delay(200);
   }
 }
