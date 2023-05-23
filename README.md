@@ -11,3 +11,6 @@ Log of Things Done:
 	- Need to move based on data from device
     - Motors not working
 
+3. Separate all code into each device-specific header files
+    - "mane.h" and "mane.cpp" are the entry points from the arduino.ino file"
+
